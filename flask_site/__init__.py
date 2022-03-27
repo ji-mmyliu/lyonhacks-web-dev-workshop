@@ -6,4 +6,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
 db = SQLAlchemy(app)
 
-from app import routes
+from flask_site import routes
