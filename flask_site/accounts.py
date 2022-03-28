@@ -20,11 +20,11 @@ def login_submit():
             return redirect("/")
         if usr.password == form.password.data:
             login_user(usr)
+            flash(f"Successfully logged in as {form.username.data}")
+            return redirect("/")
         else:
             flash("Incorrect password")
             return redirect("/")
-    flash(f"Successfully logged in as {form.username.data}")
-    return redirect("/")
 
 @app.route("/register")
 def register():
@@ -36,7 +36,8 @@ def register_submit():
     form = RegistrationForm()
     if form.validate_on_submit():
         if User.query.filter_by(username = form.username.data).first():
-            return "A user with this username already exists"
+            flash("A user with this username already exists")
+            return redirect("/")
         usr = User(username = form.username.data, password = form.password.data)
         db.session.add(usr)
         db.session.commit()

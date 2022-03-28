@@ -1,6 +1,8 @@
 {% extends "index.html" %}
 {% block content %}
 
+<h1>Home</h1>
+
 {% if current_user.is_authenticated %}
 <h3>
     Currently logged in as {{ current_user.username }}.
