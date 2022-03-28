@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+
+{% if current_user.is_authenticated %}
+<h3>
+    Currently logged in as {{ current_user.username }}.
+</h3>
+
+{% else %}
+
+<h3>
+    Not logged in.
+</h3>
+
+{% endif %}
+
+{% endblock %}
