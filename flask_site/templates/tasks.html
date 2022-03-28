@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        font-weight:normal;
+    }
+
+    th {
+        background-color: #dddddd;
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        font-weight:500;
+    }
+</style>
+
+{% if tasks %}
+<table>
+    <thead>
+        <tr>
+            <td>Task Id</td>
+            <td>Owner</td>
+            <td>Task</td>
+            <td>Date created</td>
+            <td>Delete</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.owner.username }}</td>
+            <td>{{ task.content }}</td>
+            <td>{{ task.date_created }}</td>
+            <td><form action="/tasks/{{task.id}}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete task {{task.id}}?');"><button>Delete</button></form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No tasks yet</p>
+{% endif %}
+
+<a href="/tasks/new"><button>Create New Task</button></a>
+<a href="/"><button>Return home</button></a>
+
+{% endblock %}

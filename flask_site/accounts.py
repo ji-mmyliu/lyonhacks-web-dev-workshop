@@ -16,7 +16,8 @@ def login_submit():
     if form.validate_on_submit():
         usr = User.query.filter_by(username = form.username.data).first()
         if not usr:
-            return "Username not found"
+            flash("Username not found")
+            return redirect("/")
         if usr.password == form.password.data:
             login_user(usr)
         else:

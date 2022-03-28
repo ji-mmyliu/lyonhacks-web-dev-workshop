@@ -4,12 +4,16 @@
 {% if current_user.is_authenticated %}
 <h3>
     Currently logged in as {{ current_user.username }}.
+    <a href="/tasks"><button>My Tasks</button></a>
+    <a href="/logout"><button>Log Out</button></a>
 </h3>
 
 {% else %}
 
 <h3>
     Not logged in.
+    <a href="/login"><button type="button">Log In</button></a>
+    <a href="/register"><button>Register</button></a>
 </h3>
 
 {% endif %}
