@@ -93,7 +93,6 @@ body {
   align-items: center;
   border-bottom: 2px solid #d1d3d4;
   cursor: pointer;
-  background-color: #d161ff;
 }
 
 .task span {
@@ -104,7 +103,6 @@ body {
   overflow-wrap: anywhere;
   padding-right: 50px;
   hyphens: auto;
-  background-color: aqua;
 }
 
 .task button {
@@ -116,6 +114,20 @@ body {
   border: none;
   cursor: pointer;
   outline: none;
+}
+
+#footer {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  font-family: var(--pop);
+
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
 .completed {
