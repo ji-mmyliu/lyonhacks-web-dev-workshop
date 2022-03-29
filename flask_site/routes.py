@@ -39,5 +39,4 @@ def delete_task(task_id):
         return redirect("/tasks")
     db.session.delete(task)
     db.session.commit()
-    flash(f"Successfully deleted task {task_id}")
     return redirect("/tasks")
