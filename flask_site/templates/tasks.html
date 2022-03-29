@@ -17,7 +17,7 @@
         {% for task in tasks %}
             <div class="task">
                 <span>{{ task.content }}</span>
-                <form action="/tasks/{{task.id}}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete task {{task.id}}?');">
+                <form action="/tasks/{{task.id}}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?');">
                     <button>Delete</button>
                 </form>
             </div>
