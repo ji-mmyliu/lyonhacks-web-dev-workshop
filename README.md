@@ -19,3 +19,5 @@ Then run the app using
 ```
 python3 run.py
 ```
+
+You should then be able to access the web app on your browser at http://localhost:5000/.
