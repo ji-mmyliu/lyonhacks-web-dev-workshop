@@ -27,9 +27,10 @@
         {{ form.hidden_tag() }}
         {{ form.username(placeholder = "Username") }}
         {{ form.password(placeholder = "Password") }}
+        {{ form.confirm_password(placeholder = "Confirm Password") }}
     </div>
     
-    <button type="submit" for="credentials">Submit</button>
+    <button type="submit" for="credentials">Register</button>
 </form>
 
 {% endblock %}

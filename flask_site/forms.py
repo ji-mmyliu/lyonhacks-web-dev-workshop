@@ -11,6 +11,7 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators = [DataRequired()])
     password = PasswordField('Password', validators = [DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators = [DataRequired()])
     submit = SubmitField('Register')
 
 class CreateTaskForm(FlaskForm):

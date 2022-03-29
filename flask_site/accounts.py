@@ -40,6 +40,10 @@ def register_submit():
         if User.query.filter_by(username = form.username.data).first():
             flash("Error: a user with this username already exists")
             return redirect("/register")
+        if form.password.data != form.confirm_password.data:
+            flash("Error: password confirmation does not match")
+            return redirect("/register")
+        
         usr = User(username = form.username.data, password = form.password.data)
         db.session.add(usr)
         db.session.commit()
