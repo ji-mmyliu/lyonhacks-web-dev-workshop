@@ -9,18 +9,16 @@ from flask_login import current_user
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    if current_user.is_authenticated:
+        return redirect("/tasks")
+    else:
+        return redirect("/login")
 
 @app.route('/tasks')
 @login_required
 def tasks():
-    return render_template("tasks.html", tasks = Task.query.filter_by(owner = current_user))
-
-@app.route('/tasks/new')
-@login_required
-def new_task():
     form = CreateTaskForm()
-    return render_template("create_task.html", form = form)
+    return render_template("tasks.html", form = form, tasks = Task.query.filter_by(owner = current_user))
 
 @app.route('/tasks/new', methods = ["POST"])
 @login_required

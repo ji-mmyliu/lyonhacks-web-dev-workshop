@@ -1,10 +1,35 @@
 {% extends "index.html" %}
 {% block content %}
-<form method="POST" action="">
-    {{ form.hidden_tag() }}
-    <h2>Log In</h2>
-    {{ form.username.label }} {{ form.username }}
-    {{ form.password.label }} {{ form.password }}
-    {{ form.submit }}
+
+<head>
+    <link rel="stylesheet" href="static/accounts.css">
+</head>
+
+<form method="POST" action="/login" class="form-container" id="credentials">
+    <div class="button-container">
+        <a href="#" class="selected">Log in</a>
+        <a href="/register">Sign up</a>
+    </div>
+    
+    <div class="container input-container">
+        
+        <!-- Flashed Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <span>
+                    {{ message }}
+                </span>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {{ form.hidden_tag() }}
+        {{ form.username(placeholder = "Username") }}
+        {{ form.password(placeholder = "Password") }}
+    </div>
+    
+    <button type="submit" for="credentials">Submit</button>
 </form>
+
 {% endblock %}

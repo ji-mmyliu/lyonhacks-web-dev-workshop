@@ -15,4 +15,3 @@ class RegistrationForm(FlaskForm):
 
 class CreateTaskForm(FlaskForm):
     content = StringField('Content', validators = [DataRequired()])
-    submit = SubmitField('Create Task')

@@ -1,59 +1,32 @@
 {% extends "index.html" %}
 {% block content %}
+<head>
+    <link rel="stylesheet" href="static/style.css">
+</head>
 
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-        font-weight:normal;
-    }
-
-    th {
-        background-color: #dddddd;
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-        font-weight:500;
-    }
-</style>
-
-<h2>{{current_user.username}}'s tasks</h2>
-
-{% if tasks %}
-<table>
-    <thead>
-        <tr>
-            <td>Task Id</td>
-            <td>Owner</td>
-            <td>Task</td>
-            <td>Date created</td>
-            <td>Delete</td>
-        </tr>
-    </thead>
-
-    <tbody>
+<div class="container">
+    <div id="newtask">
+        <form method="POST" action="/tasks/new">
+            {{ form.hidden_tag() }}
+            {{ form.content(placeholder="Task to be done..") }}
+            <button id="push">Add</button>
+        </form>
+    </div>
+    <div id="tasks">
+        {% if tasks.count() > 0 %}
         {% for task in tasks %}
-        <tr>
-            <td>{{ task.id }}</td>
-            <td>{{ task.owner.username }}</td>
-            <td>{{ task.content }}</td>
-            <td>{{ task.date_created }}</td>
-            <td><form action="/tasks/{{task.id}}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete task {{task.id}}?');"><button>Delete</button></form>
-        </tr>
+            <div class="task">
+                <span>{{ task.content }}</span>
+                <form action="/tasks/{{task.id}}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete task {{task.id}}?');"><button>Delete</button></form>
+            </div>
         {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>No tasks yet</p>
-{% endif %}
+        {% else %}
+        <div class="task">
+            <span><em>No tasks yet. Add one above!</em></span>
+        </div>
+        {% endif %}
+    </div>
 
-<a href="/tasks/new"><button>Create New Task</button></a>
-<a href="/"><button>Return home</button></a>
-
+    <span id="footer">Signed in as {{ current_user.username }}. <a href="/logout">Sign out</a></span>
+</div>
 {% endblock %}

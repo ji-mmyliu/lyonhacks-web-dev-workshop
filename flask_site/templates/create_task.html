@@ -1,9 +1,0 @@
-{% extends "index.html" %}
-{% block content %}
-<form method="POST" action="">
-    {{ form.hidden_tag() }}
-    <h2>Create a new task</h2>
-    {{ form.content.label }} {{ form.content }}
-    {{ form.submit }}
-</form>
-{% endblock %}

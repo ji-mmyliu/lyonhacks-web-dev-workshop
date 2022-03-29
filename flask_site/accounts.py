@@ -16,15 +16,17 @@ def login_submit():
     if form.validate_on_submit():
         usr = User.query.filter_by(username = form.username.data).first()
         if not usr:
-            flash("Username not found")
-            return redirect("/")
+            flash("Error: Username not found")
+            return redirect("/login")
         if usr.password == form.password.data:
             login_user(usr)
-            flash(f"Successfully logged in as {form.username.data}")
-            return redirect("/")
+            return redirect("/tasks")
         else:
-            flash("Incorrect password")
-            return redirect("/")
+            flash("Error: Password does not match with username")
+            return redirect("/login")
+    else:
+        flash("Invalid post request")
+        return redirect("/login")
 
 @app.route("/register")
 def register():
@@ -36,16 +38,19 @@ def register_submit():
     form = RegistrationForm()
     if form.validate_on_submit():
         if User.query.filter_by(username = form.username.data).first():
-            flash("A user with this username already exists")
-            return redirect("/")
+            flash("Error: a user with this username already exists")
+            return redirect("/register")
         usr = User(username = form.username.data, password = form.password.data)
         db.session.add(usr)
         db.session.commit()
-    flash(f"Successfully registered account as {usr.username}")
-    return redirect("/")
+        login_user(usr)
+        return redirect("/tasks")
+    else:
+        flash("Invalid post request")
+        return redirect("/register")
 
 @app.route("/logout")
 def logout():
     logout_user()
-    flash("Successfully logged out", "success")
+    flash("Successfully logged out. See you later!")
     return redirect("/")
