@@ -5,6 +5,8 @@ from flask_site.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from flask import render_template, redirect, flash
 
+import bcrypt
+
 @app.route("/login")
 def login():
     form = LoginForm()
@@ -18,7 +20,7 @@ def login_submit():
         if not usr:
             flash("Error: Username not found")
             return redirect("/login")
-        if usr.password == form.password.data:
+        if bcrypt.checkpw(form.password.data.encode(), usr.password):
             login_user(usr)
             return redirect("/tasks")
         else:
@@ -44,7 +46,8 @@ def register_submit():
             flash("Error: password confirmation does not match")
             return redirect("/register")
         
-        usr = User(username = form.username.data, password = form.password.data)
+        hashed = bcrypt.hashpw(form.password.data.encode(), bcrypt.gensalt())
+        usr = User(username = form.username.data, password = hashed)
         db.session.add(usr)
         db.session.commit()
         login_user(usr)
