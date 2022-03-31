@@ -3,7 +3,7 @@ from flask_site.forms import CreateTaskForm
 from flask_site.models import User, Task
 from flask_login import login_required
 
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, abort
 from flask_login import current_user
 
 @app.route('/')
@@ -35,8 +35,7 @@ def new_task_submit():
 def delete_task(task_id):
     task = Task.query.filter_by(id = task_id).first()
     if current_user != task.owner:
-        flash("You do not have permission to delete this task")
-        return redirect("/tasks")
+        abort(403)
     db.session.delete(task)
     db.session.commit()
     return redirect("/tasks")

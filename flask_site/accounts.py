@@ -9,11 +9,17 @@ import bcrypt
 
 @app.route("/login")
 def login():
+    if current_user.is_authenticated:
+        return redirect("/")
+
     form = LoginForm()
     return render_template("login.html", form = form)
 
 @app.route("/login", methods = ["POST"])
 def login_submit():
+    if current_user.is_authenticated:
+        return redirect("/")
+
     form = LoginForm()
     if form.validate_on_submit():
         usr = User.query.filter_by(username = form.username.data).first()
@@ -32,11 +38,17 @@ def login_submit():
 
 @app.route("/register")
 def register():
+    if current_user.is_authenticated:
+        return redirect("/")
+
     form = RegistrationForm()
     return render_template("register.html", form = form)
 
 @app.route("/register", methods = ["POST"])
 def register_submit():
+    if current_user.is_authenticated:
+        return redirect("/")
+
     form = RegistrationForm()
     if form.validate_on_submit():
         if User.query.filter_by(username = form.username.data).first():

@@ -1,6 +1,8 @@
 # LyonHacks II Web-Development Workshop
 ## A to-do list web app made with Flask and HTML/CSS
 
+**See the complete web app at https://lyonhacks-workshop.jimmyliu.dev/**
+
 Made by [Jimmy Liu](https://github.com/ji-mmyliu) and [Vlad Surdu](https://github.com/V1ad20)
 
 To run the site on your local machine, clone the repository and enter the directory
