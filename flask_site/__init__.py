@@ -15,3 +15,5 @@ login_manager.login_message_category = 'info'
 from flask_site import routes
 from flask_site import accounts
 from flask_site import models
+
+db.create_all()
