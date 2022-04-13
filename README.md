@@ -17,8 +17,15 @@ Install all the Python package requirements using
 python3 -m pip install -r requirements.txt
 ```
 
-Then run the app using
+Initialize the SQLite database tables by running `python3`, then
+```python3
+>>> from flask_site import db
+>>> from flask_site.models import *
+>>> db.create_all()
 ```
+
+Then run the app using
+```bash
 python3 run.py
 ```
 
